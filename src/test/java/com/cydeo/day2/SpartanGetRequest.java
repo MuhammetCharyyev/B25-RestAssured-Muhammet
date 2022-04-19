@@ -20,10 +20,10 @@ public class SpartanGetRequest {
     @Test
     public void test1() {
 
-       Response response=  RestAssured.given()
-                                   .accept(ContentType.JSON)
-                                   .when().get(url+"/api/spartans");
-       //make request to spartns API with acceptance Json
+        Response response = RestAssured.given()
+                .accept(ContentType.JSON)
+                .when().get(url + "/api/spartans");
+        //make request to spartns API with acceptance Json
 
         System.out.println("statusCode = " + response.statusCode());//print status code/200
 
@@ -31,11 +31,44 @@ public class SpartanGetRequest {
 
         //how to test API ?
         //verify status code is 200
-      Assertions.assertEquals(200, response.statusCode());
+        Assertions.assertEquals(200, response.statusCode());
 
         //verify content type is application json
-        Assertions.assertEquals("application/json",response.contentType());
-
-
+        Assertions.assertEquals("application/json", response.contentType());
     }
+
+         /*
+        Given accept header is application/json
+        When users send a get request to /api/spartans/3
+        Then status code must be 200
+        And Content type must be application/json
+        And json body should contain 'Fidole'
+     */
+
+        @Test
+        public void test2() {
+
+            Response response=  RestAssured.given()
+                    .accept(ContentType.JSON)
+                    .when().get(url+"/api/spartans/3");
+            //make request to spartans API with acceptance Json
+
+            System.out.println("statusCode = " + response.statusCode());//print status code/200
+
+            System.out.println("contentType = " + response.contentType());//application/json
+
+            System.out.println("contains(\"Fidole\") = " + response.body().asString().contains("Fidole"));
+
+            //how to test API ?
+            //verify status code is 200
+            Assertions.assertEquals(200, response.statusCode());
+
+            //verify content type is application json
+            Assertions.assertEquals("application/json",response.contentType());
+
+            //verify 'Fidole' exists in Json body for spartan 3
+            Assertions.assertTrue(response.body().asString().contains("Fidole"));
+
+
+        }
 }
