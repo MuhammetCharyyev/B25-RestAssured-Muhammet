@@ -1,5 +1,6 @@
 package com.cydeo.day2;
 
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -7,6 +8,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SpartanNegativeGetRequest {
 
@@ -47,4 +51,18 @@ public class SpartanNegativeGetRequest {
     And response Content Type must be application/xml;charset=UTF-8;
     */
 
+    @DisplayName("GET request with Accept XML individual Spartan")
+    @Test
+    public void test2(){
+        Response response = given()
+                .accept(ContentType.XML)
+                .when().get("/api/spartans/10");
+
+        //verify status code
+        assertEquals(406,response.statusCode());
+
+        //verify content type
+        assertEquals("application/xml;charset=UTF-8",response.contentType());
+
+    }
 }
