@@ -54,7 +54,7 @@ public class SpartanNegativeGetRequest {
     @DisplayName("GET request with Accept XML individual Spartan")
     @Test
     public void test2(){
-        Response response = given()
+        Response response = given()//we remove 'RestAssured' as it is '*' in class signature
                 .accept(ContentType.XML)
                 .when().get("/api/spartans/10");
 
