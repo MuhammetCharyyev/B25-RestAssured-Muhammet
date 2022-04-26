@@ -1,5 +1,6 @@
 package com.cydeo.day6;
 
+import com.cydeo.day6_pojo.Search;
 import com.cydeo.day6_pojo.Spartan;
 import com.cydeo.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
@@ -33,7 +34,7 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         //2 different way to do this
         //1.using as() method
         //we convert json response to spartan object with the help of Jackson
-        Spartan spartan15 = response.as(Spartan.class);
+        Spartan spartan15 = response.as(Spartan.class);//from Spartan class we created
         System.out.println(spartan15);
 
         System.out.println(spartan15.getName());
@@ -52,6 +53,42 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
 
     }
 
+    @DisplayName("GET one spartan from search endpoint and use POJO")
+    @Test
+    public void test2(){
+
+        JsonPath jsonPath = given()
+                .accept(ContentType.JSON)
+                .when().get("/api/spartans/search")
+                .then().statusCode(200)
+                .extract().jsonPath(); //as we indicate jsonPath object at top
+
+        //get the second spartan from the content list and put inside the spartan object
+        Spartan spartan = jsonPath.getObject("content[1]", Spartan.class);
+   //we indicate path name here instead of 'as' to deserialize and get exact result
+        System.out.println(spartan.getName());
+        System.out.println(spartan);
+
+    }
+
+    @DisplayName("GET one spartan from search endpoint and use POJO")
+    @Test
+    public void test3() {
+
+        Response response = given()
+                .accept(ContentType.JSON)
+                .when().get("/api/spartans/search")
+                .then().statusCode(200)
+                .extract().response(); //as we indicate response object at top
+
+//get the full content json and convert it to Search object
+        Search searchResult = response.as(Search.class);//from Search class we created
+
+        System.out.println(searchResult.getTotalElement());
+        System.out.println(searchResult.getContent().get(1).getName());
+        //'get(1)' is for getting info about index 1 spartan
+
+    }
 
 
 }
