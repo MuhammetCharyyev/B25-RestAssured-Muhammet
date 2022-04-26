@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
@@ -88,6 +90,24 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         System.out.println(searchResult.getContent().get(1).getName());
         //'get(1)' is for getting info about index 1 spartan
 
+    }
+
+    @DisplayName("GET /api/spartans/search and save as List<Spartan>")
+    @Test
+    public void test4(){
+
+        Response response = given()
+                .accept(ContentType.JSON)
+                .when().get("/api/spartans/search")
+                .then().statusCode(200)
+                .extract().response();
+
+        JsonPath jsonPath = response.jsonPath();
+
+        List<Spartan> content = jsonPath.getList("content", Spartan.class);
+        //we can put our jsonPath in one list to see all 'content'
+
+        System.out.println(content.get(1).getName());
     }
 
 

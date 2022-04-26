@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Search {
 
-    private List<Spartan> content;//meaning you include all Spartans in one List
+    private List<Spartan> content;//meaning you include Spartan class in one List
     private int totalElement;
 
     @Override
