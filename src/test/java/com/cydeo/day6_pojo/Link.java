@@ -1,12 +1,14 @@
 package com.cydeo.day6_pojo;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter //from lombok dependency
-@Setter
-@ToString
+@Data //from lombok dependency /replace all below annotations
+//@Getter
+//@Setter
+//@ToString
 
 public class Link {
 
