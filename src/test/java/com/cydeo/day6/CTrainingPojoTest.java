@@ -55,12 +55,6 @@ public class CTrainingPojoTest {
                 .header("Date", notNullValue())
                 .extract().response();
 
-        response.prettyPrint();
-
-        //verify status code
-        assertEquals(200,response.statusCode());
-
-
         //payload/body verification
         /*
         firstName Karole                          --> students[0].firstName
