@@ -1,4 +1,6 @@
-package com.cydeo.day6_pojo;
+package com.cydeo.day6_pojo.spartan;
+
+import com.cydeo.day6_pojo.spartan.Spartan;
 
 import java.util.List;
 

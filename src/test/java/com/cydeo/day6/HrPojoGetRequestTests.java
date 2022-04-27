@@ -1,12 +1,11 @@
 package com.cydeo.day6;
 
-import com.cydeo.day6_pojo.Employee;
-import com.cydeo.day6_pojo.Region;
+import com.cydeo.day6_pojo.hr.Employee;
+import com.cydeo.day6_pojo.hr.Region;
 import com.cydeo.utilities.HrTestBase;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
 public class HrPojoGetRequestTests extends HrTestBase {

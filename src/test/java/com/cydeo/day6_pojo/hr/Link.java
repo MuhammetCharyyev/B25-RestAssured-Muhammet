@@ -1,4 +1,4 @@
-package com.cydeo.day6_pojo;
+package com.cydeo.day6_pojo.hr;
 
 import lombok.Data;
 import lombok.Getter;

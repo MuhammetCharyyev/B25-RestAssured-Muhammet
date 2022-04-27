@@ -1,7 +1,8 @@
-package com.cydeo.day6_pojo;
+package com.cydeo.day6_pojo.hr;
 
 import java.util.List;
 
+import com.cydeo.day6_pojo.hr.Link;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 

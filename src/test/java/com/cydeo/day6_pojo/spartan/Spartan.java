@@ -1,4 +1,4 @@
-package com.cydeo.day6_pojo;
+package com.cydeo.day6_pojo.spartan;
 
 public class Spartan {
 
