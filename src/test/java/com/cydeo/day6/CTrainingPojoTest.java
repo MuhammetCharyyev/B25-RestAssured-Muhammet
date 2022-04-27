@@ -54,6 +54,10 @@ public class CTrainingPojoTest {
                 .and()
                 .header("Date", notNullValue())
                 .extract().response();
+        //extract helps you to store your json path inside to Json or Response object to
+        //allow you to implement deserialization, save response inside Collections
+        //and also save response inside custom classes
+
 
         //payload/body verification
         /*
