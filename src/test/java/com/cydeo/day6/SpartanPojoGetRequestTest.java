@@ -65,9 +65,10 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
                 .then().statusCode(200)
                 .extract().jsonPath(); //as we indicate jsonPath object at top
 
-        //get the second spartan from the content list and put inside the spartan object
+//get the second spartan from the content list and put inside the spartan object
         Spartan spartan = jsonPath.getObject("content[1]", Spartan.class);
    //we indicate path name here instead of 'as' to deserialize and get exact result
+        //in comparison with 'as' the 'getObject' with path is more flexible
         System.out.println(spartan.getName());
         System.out.println(spartan);
 
@@ -85,10 +86,16 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
 
 //get the full content json and convert it to Search object
         Search searchResult = response.as(Search.class);//from Search class we created
+        //we can also use jackson to get Search result:
+        // Search search2 = response.jsonPath().getObject("", Search.class);
+
+        //as Search class contains 2 variables - int and List<Spartan>, we can call
+        //these variables with getters below
 
         System.out.println(searchResult.getTotalElement());
         System.out.println(searchResult.getContent().get(1).getName());
-        //'get(1)' is for getting info about index 1 spartan
+        //'get(1)' is for getting info about index 1 spartan from List<Spartan>
+        //as List contains Spartan class we refer to each variable of this class
 
     }
 
@@ -105,7 +112,7 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         JsonPath jsonPath = response.jsonPath();
 
         List<Spartan> content = jsonPath.getList("content", Spartan.class);
-        //we can put our jsonPath in one list to see all 'content'
+        //we can put our jsonPath in one list to see all 'content'/getList is on help
 
         System.out.println(content.get(1).getName());
     }
