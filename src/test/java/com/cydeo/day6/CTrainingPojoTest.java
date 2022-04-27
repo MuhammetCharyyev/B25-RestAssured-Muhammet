@@ -71,11 +71,11 @@ public class CTrainingPojoTest {
          */
 
         //get jsonpath object
-        Students students = response.as(Students.class);
+        Students students = response.as(Students.class);//deserialization here
 //call from Students class
         System.out.println(students);
        Student student1 = students.getStudents().get(0);
-       //get info about 1 student, put it in Students object
+       //get info about 1 student as below, put it in Students object
 
         JsonPath jsonPath = response.jsonPath();
         //convert Students to Json response
