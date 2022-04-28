@@ -1,5 +1,10 @@
 package com.cydeo.day6_pojo.spartan;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value ="id", allowSetters = true)
+//we ignore not using 'id' in our test
+
 public class Spartan {
 
     //to create pojo
