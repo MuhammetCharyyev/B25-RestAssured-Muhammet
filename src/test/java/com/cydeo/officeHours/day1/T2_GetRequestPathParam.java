@@ -35,8 +35,6 @@ public class T2_GetRequestPathParam {
         System.out.println(response.path("last_name").toString());
         // href
         System.out.println(response.path("links[0].href").toString());
-        int[] a=new int[5];
-        System.out.println(a[0]);
         //      - Verify status code is 200
         //      - Verify First Name is "Peter"
         //      - Verify content-Type is application/json
