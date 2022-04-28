@@ -143,4 +143,53 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
 
     }
 
+    @DisplayName("Post a spartan Spartan class")
+    @Test
+    public void test4(){
+
+        //create one spartan with Spartan object
+        //POST it
+        //get id number dynamically
+        //send a get request
+        //save information in spartan object
+        //assert that information matching
+
+        //create one object from POJO, send it as a json
+        Spartan spartanPost = new Spartan();
+        spartanPost.setGender("Male");
+        spartanPost.setName( "Bruce Wayne");
+        spartanPost.setPhone(8877445596l);
+        //we call object from Spartan class and set all variables to creat json body
+//we deliberately ignore 'id' from our Spartan class by annotation in POJO class
+        //@JsonIgnoreProperties(value ="id", allowSetters = true)
+
+
+        int idFromPost =  given().accept(ContentType.JSON).log().all() // what we are asking from api which is JSON response
+                .and()
+                .contentType(ContentType.JSON) //what we are sending to api, which is JSON request body
+                .body(spartanPost)
+                .when()
+                .post("/api/spartans")
+                .then()
+                .statusCode(201)
+                .contentType("application/json")
+                .body("success",is("A Spartan is Born!"))
+                .extract().response().jsonPath().getInt("data.id");
+        //we'll get here int(id#) as return that we post in API
+
+        Spartan spartanGet = given().accept(ContentType.JSON)
+                .and().pathParam("id", idFromPost)
+                .when().get("/api/spartans/{id}")
+                .then().statusCode(200).log().all()
+                .extract().response().as(Spartan.class);
+        //here we'll get our actual result for id from API
+
+        //verify names for this particular id are matching
+        assertThat(spartanGet.getName(),is(spartanPost.getName()));
+
+
+
+
+    }
+
 }
